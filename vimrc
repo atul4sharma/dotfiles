@@ -148,3 +148,4 @@ if &diff
     hi DiffText   cterm=none ctermbg=red  ctermfg=black
 endif
 
+nnoremap <F2> :setlocal number! <CR>
