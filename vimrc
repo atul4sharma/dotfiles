@@ -118,6 +118,7 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set number
+set relativenumber
 set wildmenu
 set showmatch
 set is
@@ -150,7 +151,7 @@ if &diff
     hi DiffText   cterm=none ctermbg=red  ctermfg=black
 endif
 
-nnoremap <F2> :setlocal number! <CR>
+nnoremap <F2> :setlocal number! <bar> setlocal relativenumber!<CR>
 
 hi LineNr cterm=none ctermbg=none ctermfg=cyan
 
@@ -175,3 +176,4 @@ execute pathogen#infect()
 
 map <C-o> :NERDTreeToggle<CR>
 
+command! Rts :%s/\s\+$//
