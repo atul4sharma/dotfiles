@@ -141,7 +141,7 @@ set cursorcolumn
 hi CursorColumn cterm=none ctermbg=235 ctermfg=none
 
 set laststatus=2
-hi StatusLine cterm=none ctermbg=236 ctermfg=cyan
+" hi StatusLine cterm=none ctermbg=236 ctermfg=cyan
 
 
 if &diff
@@ -152,6 +152,8 @@ if &diff
 endif
 
 nnoremap <F2> :setlocal number! <bar> setlocal relativenumber!<CR>
+nnoremap <F9> gT
+nnoremap <F10> gt
 
 hi LineNr cterm=none ctermbg=none ctermfg=cyan
 
@@ -159,5 +161,8 @@ command! Rts :%s/\s\+$//
 
 set matchpairs+=<:>
 
-:source /home/atul/.vim/bundle/tabulous/plugin/tabulous.vim
+" This is for vim-gitgutter
+set updatetime=100
 
+" install fzf on system first and add config directory as runtime path
+set rtp+=/usr/share/fzf
