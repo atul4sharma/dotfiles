@@ -25,6 +25,8 @@ alias MAIN="cp -r /home/atul/cpp_practice_github/skeleton_code/ ./ && mv skeleto
 alias vp="vim -p"
 alias tmux="tmux -u"
 
+alias ...="cd ../../../"
+
 ## git aliases
 alias gst="git status"
 alias gd="git diff"
