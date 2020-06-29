@@ -26,4 +26,8 @@ alias vp="vim -p"
 alias tmux="tmux -u"
 
 ## git aliases
-alias gits="git status"
+alias gst="git status"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias gl="git log --pretty=format:'%C(bold blue)%><(10)%h %C(green)%<(15)%cr %C(red)%><(20)%an %C(cyan)|%C(reset) %s %C(bold yellow)%d' -20"
+alias gcm="git checkout master"
