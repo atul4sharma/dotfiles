@@ -1,39 +1,6 @@
 
-/home/atul/.vim/
-`-- pack
-    `-- dist
-        |-- opt
-        `-- start
-            |-- fzf.vim
-            |   |-- autoload
-            |   |   `-- fzf
-            |   |       `-- vim
-            |   |-- bin
-            |   |-- doc
-            |   `-- plugin
-            |-- vim-airline
-            |   |-- autoload
-            |   |   `-- airline
-            |   |       |-- extensions
-            |   |       |   |-- tabline
-            |   |       |   |   `-- formatters
-            |   |       |   `-- wordcount
-            |   |       |       `-- formatters
-            |   |       `-- themes
-            |   |-- doc
-            |   |-- plugin
-            |   `-- t
-            `-- vim-gitgutter
-                |-- autoload
-                |   `-- gitgutter
-                |-- doc
-                |-- plugin
-                `-- test
+https://github.com/junegunn/vim-plug
 
-29 directories
-
-
-
-https://github.com/junegunn/fzf.vim.git
-https://github.com/vim-airline/vim-airline
-https://github.com/airblade/vim-gitgutter.git
+/Users/atul/.vim
+├── autoload
+    └── plug.vim

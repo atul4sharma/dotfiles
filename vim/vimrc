@@ -166,3 +166,28 @@ set updatetime=100
 
 " install fzf on system first and add config directory as runtime path
 set rtp+=/usr/share/fzf
+
+" this needs vim-plug to be installed
+" https://github.com/junegunn/vim-plug
+" call :PlugInstall to install all the mentioned plugins
+call plug#begin()
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+call plug#end()
+
+" FZF plugin settings
+" Always enable preview window on the right with 40% width
+let g:fzf_layout={'down':'~40%'}
+" let g:fzf_colors={'border':  ['fg', 'Conditional', 'Bright']}
+
+" This is to enable vim copying and pasting to sync with clipboard
+" Disabling for now, since my mind is setup to process clipboard and vim
+" separately
+" set clipboard=unnamed
+
+
