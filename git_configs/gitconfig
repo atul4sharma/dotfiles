@@ -1,8 +1,10 @@
 [user]
 	name = Atul Sharma
 	email = atulsharma406@gmail.com
+
 [ui]
 	color = true
+
 [core]
 	editor = vim
 	excludesfile = /home/atul/.gitignore_global
@@ -11,12 +13,16 @@
 
 [color]
 	ui = true
+
 [url "https://anongit.kde.org/"]
 	insteadOf = kde:
+
 [url "git@git.kde.org:"]
 	pushInsteadOf = kde:
+
 [alias]
 	co = checkout
 	ci = commit
+
 [pull]
 	rebase = true
