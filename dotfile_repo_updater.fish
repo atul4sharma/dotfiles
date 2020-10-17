@@ -20,11 +20,12 @@ function copy_from_to --description 'Copy files from $argv[1] to $argv[2]'
 end
 
 set -l file_list_to_check \
-    "$HOME/.vimrc","$DOTFILE_REPO/vim/vimrc" \
+    "$HOME/.vimrc,$DOTFILE_REPO/vim/vimrc" \
     "$HOME/.config/alacritty/alacritty.yml,$DOTFILE_REPO/alacritty/alacritty.yml" \
     "$HOME/.tmux.conf,$DOTFILE_REPO/tmux/tmux.conf" \
     "$HOME/.gitconfig,$DOTFILE_REPO/git_configs/gitconfig" \
     "$HOME/.gitignore_global,$DOTFILE_REPO/git_configs/gitignore_global" \
+    "$HOME/.config/fish/,$DOTFILE_REPO/fish_configs/"
 
 for item in $file_list_to_check
     set __elements (string split ',' $item)
