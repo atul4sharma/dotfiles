@@ -1,0 +1,13 @@
+alfred
+firefox
+font-fira-code
+font-fira-mono
+font-fira-sans
+grammarly
+macmediakeyforwarder
+notion
+osxfuse
+qt-creator
+spotify
+tiles
+vlc
