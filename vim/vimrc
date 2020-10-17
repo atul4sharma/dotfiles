@@ -54,6 +54,7 @@ inoremap <C-U> <C-G>u<C-U>
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
+  set incsearch
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -124,7 +125,8 @@ set showmatch
 set is
 
 set ic
- 
+syntax enable
+
 func! WordProcessorMode()
     setlocal textwidth=80
     setlocal smartindent
@@ -133,16 +135,22 @@ endfu
 
 com! WP call WordProcessorMode()
 
-
 set cursorline
 hi CursorLine cterm=none ctermbg=235 ctermfg=none
 
 set cursorcolumn
 hi CursorColumn cterm=none ctermbg=235 ctermfg=none
 
+hi LineNr cterm=none ctermbg=none ctermfg=cyan
+
 set laststatus=2
 " hi StatusLine cterm=none ctermbg=236 ctermfg=cyan
 
+" SearchResult
+hi Search ctermfg=black ctermbg=LightYellow cterm=none
+
+" Vertical split separator
+hi VertSplit cterm=none ctermbg=236 ctermfg=cyan
 
 if &diff
     hi DiffAdd    cterm=none ctermbg=blue ctermfg=white
@@ -151,11 +159,10 @@ if &diff
     hi DiffText   cterm=none ctermbg=red  ctermfg=black
 endif
 
-nnoremap <F2> :setlocal number! <bar> setlocal relativenumber!<CR>
-nnoremap <F9> gT
+nnoremap <F2>  :setlocal number! <bar> setlocal relativenumber!<CR>
+nnoremap <F5>  :source $MYVIMRC<CR>
+nnoremap <F9>  gT
 nnoremap <F10> gt
-
-hi LineNr cterm=none ctermbg=none ctermfg=cyan
 
 command! Rts :%s/\s\+$//
 
@@ -165,7 +172,10 @@ set matchpairs+=<:>
 set updatetime=100
 
 " install fzf on system first and add config directory as runtime path
-set rtp+=/usr/share/fzf
+set rtp+=/usr/local/opt/fzf
+
+" to create swap files in different directory
+set directory=$HOME/.vim/.swapfiles/
 
 " this needs vim-plug to be installed
 " https://github.com/junegunn/vim-plug
@@ -178,16 +188,38 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug 'chrisbra/unicode.vim'
+
+" https://github.com/rust-lang/rust.vim
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
+
+" airline theme
+let g:airline_theme='molokai'
 
 " FZF plugin settings
 " Always enable preview window on the right with 40% width
-let g:fzf_layout={'down':'~40%'}
+let g:fzf_layout={'down':'~35%'}
 " let g:fzf_colors={'border':  ['fg', 'Conditional', 'Bright']}
+command! -nargs=? Tabe :tabe|Files <args>
 
 " This is to enable vim copying and pasting to sync with clipboard
 " Disabling for now, since my mind is setup to process clipboard and vim
 " separately
 " set clipboard=unnamed
+
+
+" Rust settings
+"" Automatic rust formatting on save
+let g:rustfmt_autosave=1
+
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
 
 
