@@ -7,7 +7,7 @@
 
 [core]
 	editor = vim
-	excludesfile = /home/atul/.gitignore_global
+	excludesfile = /Users/atul/.gitignore_global
 	autocrlf = false
 	filemode = false
 
