@@ -1,3 +1,0 @@
-[submodule "ansible_playbooks"]
-	path = ansible_playbooks
-	url = https://github.com/atul4sharma/ansible_playbooks.git
