@@ -70,3 +70,11 @@ set -gx CPPFLAGS "-I/usr/local/opt/qt/include"
 set -gx PKG_CONFIG_PATH "/usr/local/opt/qt/lib/pkgconfig"
 #
 ########################################
+
+########################################
+## docker aliases to make application call easier
+#
+# https://github.com/asciinema/asciicast2gif
+alias asciicast2gif='docker run --rm -v /Users/atul/Documents/asciicast_recordings:/data asciinema/asciicast2gif'
+########################################
+
