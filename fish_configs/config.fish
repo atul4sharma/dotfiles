@@ -25,6 +25,7 @@ alias cr='cargo run'
 alias g11='g++ -std=c++11 -Wall'
 alias g14='g++ -std=c++14 -Wall'
 alias g17='g++ -std=c++17 -Wall'
+alias g17='g++ -std=c++20 -Wall'
 
 # alias MAIN="cp -r /home/atul/cpp_practice_github/skeleton_code/ ./ && mv skeleton_code/* . && rmdir skeleton_code"
 
@@ -37,15 +38,19 @@ alias ...="cd ../../../"
 alias gst="git status"
 alias gd="git diff"
 alias gds="git diff --staged"
-alias gl="git log --pretty=format:'%C(bold blue)%><(10)%h %C(green)%<(15)%cr %C(red)%><(20)%an %C(cyan)|%C(reset) %s %C(bold yellow)%d' -20"
+alias glog="git log --pretty=format:'%C(bold blue)%><(10)%h %C(green)%<(15)%cr %C(red)%><(20)%an %C(cyan)|%C(reset) %s %C(bold yellow)%d'"
 alias gcm="git checkout master"
+alias gl="glog -20"
 
 ## golang paths
 ## https://medium.com/@jimkang/install-go-on-mac-with-homebrew-5fa421fc55f5
-set -x GOPATH $HOME/code/go
 set -x GOROOT (brew --prefix golang)/libexec
-set -x PATH $PATH {$GOPATH}/bin {$GOROOT}/bin
-
+set -x PATH $PATH {$GOROOT}/bin
+## this is for golibraries
+set -x GOPATH $HOME/code/go/golib
+set -x PATH $PATH {$GOPATH}/bin
+## this is for my local binaries
+set -x GOPATH $GOPATH $HOME/code/go/development
 
 ########################################
 ## qt installation
@@ -77,4 +82,6 @@ set -gx PKG_CONFIG_PATH "/usr/local/opt/qt/lib/pkgconfig"
 # https://github.com/asciinema/asciicast2gif
 alias asciicast2gif='docker run --rm -v /Users/atul/Documents/asciicast_recordings:/data asciinema/asciicast2gif'
 ########################################
+
+
 
