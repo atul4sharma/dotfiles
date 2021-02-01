@@ -19,7 +19,7 @@ function copy_from_to --description 'Copy files from $argv[1] to $argv[2]'
     cp -r $argv[1] $argv[2]
 end
 
-function main_fn
+function check_dotfiles
     set -l file_list_to_check \
         "$HOME/.vimrc,$DOTFILE_REPO/vim/vimrc" \
         "$HOME/.config/alacritty/alacritty.yml,$DOTFILE_REPO/alacritty/alacritty.yml" \
@@ -38,6 +38,18 @@ function main_fn
             copy_from_to $__elements[1] $__elements[2]
         end
     end
+end
+
+function update_brewfile
+    printf '\n\n*************** Updating Brewfile ***************\n'
+    cd $DOTFILE_REPO/brew_packages
+    command brew bundle dump -f --describe
+    cd -
+end
+
+function main_fn
+    check_dotfiles
+    update_brewfile
 end
 
 main_fn
