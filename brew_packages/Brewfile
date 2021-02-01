@@ -3,47 +3,86 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
+# File system integration
 cask "osxfuse"
+# Automate deployment, configuration, and upgrading
 brew "ansible"
+# Record and share terminal sessions
 brew "asciinema"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Collection of portable C++ source libraries
 brew "boost"
+# GNU File, Shell, and Text utilities
 brew "coreutils"
+# Bash, Zsh and Fish completion for Docker
 brew "docker-completion"
+# More intuitive version of du in rust
 brew "dust"
+# Read-only implementation of ext4 for FUSE
 brew "ext4fuse"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# OpenType text shaping engine
 brew "harfbuzz"
+# Play, record, convert, and stream audio and video
 brew "ffmpeg"
+# User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU compiler collection
 brew "gcc"
+# Distributed revision control system
 brew "git"
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Improved top (interactive process viewer)
 brew "htop"
+# Interpreted, interactive, object-oriented programming language
 brew "python@3.8"
+# Lynx-like WWW browser that supports tables, menus, etc.
 brew "links"
+# Next-gen compiler infrastructure
 brew "llvm"
+# Read-write NTFS driver for FUSE
 brew "ntfs-3g"
+# Cross-platform application and UI framework
 brew "qt", link: true
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Powerful, clean, object-oriented scripting language
 brew "ruby"
+# Version control system designed to be a better CVS
 brew "subversion"
+# Simplified and community-driven man pages
 brew "tldr"
+# Terminal multiplexer
 brew "tmux"
+# Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Vi 'workalike' with many additional features
 brew "vim"
+# Internet file retriever
 brew "wget"
+# Download YouTube videos from the command-line
 brew "youtube-dl"
+# Application launcher and productivity software
 cask "alfred"
+# Web browser
 cask "firefox"
 cask "font-fira-code"
 cask "font-fira-mono"
 cask "font-fira-sans"
+# Utility to fix grammar errors and style issues in text
 cask "grammarly"
 cask "macmediakeyforwarder"
+# App to write, plan, collaborate, and get organized
 cask "notion"
 cask "qt-creator"
+# Music streaming service
 cask "spotify"
+# Window manager
 cask "tiles"
+# Multimedia player
 cask "vlc"
