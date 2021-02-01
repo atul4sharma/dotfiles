@@ -25,7 +25,7 @@ alias cr='cargo run'
 alias g11='g++ -std=c++11 -Wall'
 alias g14='g++ -std=c++14 -Wall'
 alias g17='g++ -std=c++17 -Wall'
-alias g17='g++ -std=c++20 -Wall'
+alias g20='g++ -std=c++20 -Wall'
 
 # alias MAIN="cp -r /home/atul/cpp_practice_github/skeleton_code/ ./ && mv skeleton_code/* . && rmdir skeleton_code"
 
