@@ -197,6 +197,9 @@ Plug 'rust-lang/rust.vim'
 " https://github.com/fatih/vim-go-tutorial
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" https://github.com/dag/vim-fish
+Plug 'dag/vim-fish'
+
 call plug#end()
 
 " airline theme
