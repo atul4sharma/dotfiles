@@ -80,8 +80,6 @@ cask "macmediakeyforwarder"
 # App to write, plan, collaborate, and get organized
 cask "notion"
 cask "qt-creator"
-# Music streaming service
-cask "spotify"
 # Window manager
 cask "tiles"
 # Multimedia player
