@@ -7,7 +7,9 @@ function invoke_gcc
     echo $build_cpp
     command $build_cpp
 
-    set -l run_outfile ./$out_file
-    echo $run_outfile
-    command $run_outfile
+    if test $status -eq 0
+        set -l run_outfile ./$out_file
+        echo $run_outfile
+        command $run_outfile
+    end
 end
