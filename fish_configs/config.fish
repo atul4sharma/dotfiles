@@ -75,6 +75,7 @@ set -gx PKG_CONFIG_PATH "/usr/local/opt/qt/lib/pkgconfig"
 #
 # https://github.com/asciinema/asciicast2gif
 alias asciicast2gif='docker run --rm -v /Users/atul/Documents/asciicast_recordings:/data asciinema/asciicast2gif'
+alias jupyter='docker run -v $HOME/:/home/jovyan --rm -p 8888:8888 jupyter/datascience-notebook'
 ########################################
 
 
