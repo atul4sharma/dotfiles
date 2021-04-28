@@ -76,6 +76,7 @@ set -gx PKG_CONFIG_PATH "/usr/local/opt/qt/lib/pkgconfig"
 # https://github.com/asciinema/asciicast2gif
 alias asciicast2gif='docker run --rm -v /Users/atul/Documents/asciicast_recordings:/data asciinema/asciicast2gif'
 alias jupyter='docker run -v $HOME/:/home/jovyan --rm -p 8888:8888 jupyter/datascience-notebook'
+alias linux_gcc 'docker run -v $PWD/:/home/ --interactive --tty -w /home/ gcc /bin/bash'
 ########################################
 
 
@@ -84,3 +85,17 @@ alias g11 'invoke_gcc 11'
 alias g14 'invoke_gcc 14'
 alias g17 'invoke_gcc 17'
 alias g20 'invoke_gcc 2a'
+
+#######################################
+# required by binutils package
+set -g fish_user_paths "/usr/local/opt/binutils/bin" $fish_user_paths
+set -gx LDFLAGS "-L/usr/local/opt/binutils/lib"
+set -gx CPPFLAGS "-I/usr/local/opt/binutils/include"
+
+
+#######################################
+# fzf default options
+set -x FZF_DEFAULT_OPTS "--height 40% --layout=reverse"
+#set -x FZF_DEFAULT_OPTS "--height 40% --layout=reverse --preview='bat --style=numbers --color=always --line-range :20 {}'"
+set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git" 
+
