@@ -133,7 +133,8 @@ func! WordProcessorMode()
     setlocal spell spelllang=en_us
 endfu
 
-com! WP call WordProcessorMode()
+" vim rgb-color-chart
+" https://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 set cursorline
 hi CursorLine cterm=none ctermbg=235 ctermfg=none
@@ -142,6 +143,9 @@ set cursorcolumn
 hi CursorColumn cterm=none ctermbg=235 ctermfg=none
 
 hi LineNr cterm=none ctermbg=none ctermfg=cyan
+
+" pop-menu
+hi Pmenu cterm=none ctermbg=238 ctermfg=none
 
 set laststatus=2
 " hi StatusLine cterm=none ctermbg=236 ctermfg=cyan
@@ -161,6 +165,7 @@ endif
 
 nnoremap <F2>  :setlocal number! <bar> setlocal relativenumber!<CR>
 nnoremap <F5>  :source $MYVIMRC<CR>
+nnoremap <C-B> :Buffers<CR>
 nnoremap <F9>  gT
 nnoremap <F10> gt
 
@@ -200,24 +205,50 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " https://github.com/dag/vim-fish
 Plug 'dag/vim-fish'
 
+" -----------------------------------------
+" vim lsp 
+" -----------------------------------------
+" https://github.com/prabirshrestha/vim-lsp
+Plug 'prabirshrestha/vim-lsp'
+" https://github.com/mattn/vim-lsp-settings
+Plug 'mattn/vim-lsp-settings'
+" https://github.com/prabirshrestha/asyncomplete.vim
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+" -----------------------------------------
+
+
 call plug#end()
 
 " airline theme
 let g:airline_theme='molokai'
 
+" ----------------------------------------------
 " FZF plugin settings
+" ----------------------------------------------
 " Always enable preview window on the right with 40% width
-let g:fzf_layout={'down':'~35%'}
+let g:fzf_layout={'down':'~40%'}
 " let g:fzf_colors={'border':  ['fg', 'Conditional', 'Bright']}
+"
 command! -nargs=? Tabe :tabe|Files <args>
 
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+" ----------------------------------------------
+
+
+" ----------------------------------------------
 " This is to enable vim copying and pasting to sync with clipboard
 " Disabling for now, since my mind is setup to process clipboard and vim
 " separately
 " set clipboard=unnamed
+" ----------------------------------------------
 
 
+" ----------------------------------------------
 " Rust settings
+" ----------------------------------------------
 "" Automatic rust formatting on save
 let g:rustfmt_autosave=1
 
@@ -229,4 +260,32 @@ if executable('rls')
         \ })
 endif
 
+" ----------------------------------------------
+"  vim-lsp customisation
+" ----------------------------------------------
+" this disables the autocomplete pop box appearing
+let g:asyncomplete_auto_popup = 0
 
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+" To enable preview window:
+" allow modifying the completeopt variable, or it will be overridden all the time
+let g:asyncomplete_auto_completeopt = 0
+"set completeopt=menuone,noinsert,noselect,preview
+set completeopt=menuone,noselect,preview
+
+" To auto close preview window when completion is done.
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" ----------------------------------------------
