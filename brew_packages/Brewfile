@@ -3,18 +3,25 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
-# File system integration
-cask "osxfuse"
+tap "homebrew/services"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
 # Record and share terminal sessions
 brew "asciinema"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# GNU binary tools for native development
+brew "binutils"
+# Get/set bluetooth power and discoverable state
+brew "blueutil"
 # Collection of portable C++ source libraries
 brew "boost"
-# GNU File, Shell, and Text utilities
-brew "coreutils"
+# Core application library for C
+brew "glib"
+# Tool for browsing source code
+brew "cscope"
+# Reimplementation of ctags(1)
+brew "ctags"
 # Bash, Zsh and Fish completion for Docker
 brew "docker-completion"
 # More intuitive version of du in rust
@@ -33,22 +40,30 @@ brew "fish"
 brew "fzf"
 # GNU compiler collection
 brew "gcc"
+# Toolkit for image loading and pixel buffer manipulation
+brew "gdk-pixbuf"
 # Distributed revision control system
 brew "git"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Colorize logfiles and command output
+brew "grc"
 # Improved top (interactive process viewer)
 brew "htop"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.8"
+# CLI wrapper for basic network utilities on macOS - ip command
+brew "iproute2mac"
+# Library to render SVG files using Cairo
+brew "librsvg"
 # Lynx-like WWW browser that supports tables, menus, etc.
 brew "links"
 # Next-gen compiler infrastructure
 brew "llvm"
 # Read-write NTFS driver for FUSE
 brew "ntfs-3g"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.8"
 # Cross-platform application and UI framework
-brew "qt", link: true
+brew "qt"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Powerful, clean, object-oriented scripting language
@@ -59,6 +74,8 @@ brew "subversion"
 brew "tldr"
 # Terminal multiplexer
 brew "tmux"
+# Anonymizing overlay network for TCP
+brew "tor"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Vi 'workalike' with many additional features
@@ -79,6 +96,8 @@ cask "grammarly"
 cask "macmediakeyforwarder"
 # App to write, plan, collaborate, and get organized
 cask "notion"
+# File system integration
+cask "osxfuse"
 cask "qt-creator"
 # Window manager
 cask "tiles"
