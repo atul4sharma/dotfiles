@@ -26,6 +26,7 @@ function check_dotfiles
         "$HOME/.tmux.conf,$DOTFILE_REPO/tmux/tmux.conf" \
         "$HOME/.gitconfig,$DOTFILE_REPO/git_configs/gitconfig" \
         "$HOME/.gitignore_global,$DOTFILE_REPO/git_configs/gitignore_global" \
+        "$HOME/.config/vim/,$DOTFILE_REPO/vim/configs/" \
         "$HOME/.config/fish/,$DOTFILE_REPO/fish_configs/" \
         "$HOME/.config/alacritty/,$DOTFILE_REPO/alacritty/"
 
