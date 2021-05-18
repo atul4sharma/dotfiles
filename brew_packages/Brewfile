@@ -18,6 +18,8 @@ brew "blueutil"
 brew "boost"
 # Core application library for C
 brew "glib"
+# Configurable talking characters in ASCII art
+brew "cowsay"
 # Tool for browsing source code
 brew "cscope"
 # Reimplementation of ctags(1)
@@ -93,11 +95,13 @@ cask "font-fira-mono"
 cask "font-fira-sans"
 # Utility to fix grammar errors and style issues in text
 cask "grammarly"
+# Media key forwarder for iTunes and Spotify
 cask "macmediakeyforwarder"
 # App to write, plan, collaborate, and get organized
 cask "notion"
 # File system integration
 cask "osxfuse"
+# IDE for application development
 cask "qt-creator"
 # Window manager
 cask "tiles"
