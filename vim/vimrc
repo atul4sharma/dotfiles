@@ -123,15 +123,9 @@ set relativenumber
 set wildmenu
 set showmatch
 set is
-
 set ic
+set hidden       " this is to instruct vim to just hide the undo history and not discard it
 syntax enable
-
-func! WordProcessorMode()
-    setlocal textwidth=80
-    setlocal smartindent
-    setlocal spell spelllang=en_us
-endfu
 
 " vim rgb-color-chart
 " https://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
@@ -151,7 +145,7 @@ set laststatus=2
 " hi StatusLine cterm=none ctermbg=236 ctermfg=cyan
 
 " SearchResult
-hi Search ctermfg=black ctermbg=LightYellow cterm=none
+hi Search ctermfg=black ctermbg=229 cterm=none
 
 " Vertical split separator
 hi VertSplit cterm=none ctermbg=236 ctermfg=cyan
@@ -165,7 +159,6 @@ endif
 
 nnoremap <F2>  :setlocal number! <bar> setlocal relativenumber!<CR>
 nnoremap <F5>  :source $MYVIMRC<CR>
-nnoremap <C-B> :Buffers<CR>
 nnoremap <F9>  gT
 nnoremap <F10> gt
 
@@ -173,119 +166,22 @@ command! Rts :%s/\s\+$//
 
 set matchpairs+=<:>
 
-" This is for vim-gitgutter
-set updatetime=100
-
-" install fzf on system first and add config directory as runtime path
-set rtp+=/usr/local/opt/fzf
+" resize current buffer by +/- 5 
+" M corresponds to Option key(⌥) in mac and alt key
+nnoremap <M-left> :vertical resize -5<cr>
+nnoremap <M-down> :resize +5<cr>
+nnoremap <M-up> :resize -5<cr>
+nnoremap <M-right> :vertical resize +5<cr>
 
 " to create swap files in different directory
 set directory=$HOME/.vim/.swapfiles/
 
-" this needs vim-plug to be installed
-" https://github.com/junegunn/vim-plug
-" call :PlugInstall to install all the mentioned plugins
-call plug#begin()
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+source $HOME/.config/vim/plugins.vim
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+source $HOME/.config/vim/lsp-settings.vim
 
-Plug 'chrisbra/unicode.vim'
+source $HOME/.config/vim/rust-settings.vim
 
-" https://github.com/rust-lang/rust.vim
-Plug 'rust-lang/rust.vim'
+source $HOME/.config/vim/fzf-settings.vim
 
-" https://github.com/fatih/vim-go
-" https://github.com/fatih/vim-go-tutorial
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-" https://github.com/dag/vim-fish
-Plug 'dag/vim-fish'
-
-" -----------------------------------------
-" vim lsp 
-" -----------------------------------------
-" https://github.com/prabirshrestha/vim-lsp
-Plug 'prabirshrestha/vim-lsp'
-" https://github.com/mattn/vim-lsp-settings
-Plug 'mattn/vim-lsp-settings'
-" https://github.com/prabirshrestha/asyncomplete.vim
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
-" -----------------------------------------
-
-
-call plug#end()
-
-" airline theme
-let g:airline_theme='molokai'
-
-" ----------------------------------------------
-" FZF plugin settings
-" ----------------------------------------------
-" Always enable preview window on the right with 40% width
-let g:fzf_layout={'down':'~40%'}
-" let g:fzf_colors={'border':  ['fg', 'Conditional', 'Bright']}
-"
-command! -nargs=? Tabe :tabe|Files <args>
-
-" [Tags] Command to generate tags file
-let g:fzf_tags_command = 'ctags -R'
-" ----------------------------------------------
-
-
-" ----------------------------------------------
-" This is to enable vim copying and pasting to sync with clipboard
-" Disabling for now, since my mind is setup to process clipboard and vim
-" separately
-" set clipboard=unnamed
-" ----------------------------------------------
-
-
-" ----------------------------------------------
-" Rust settings
-" ----------------------------------------------
-"" Automatic rust formatting on save
-let g:rustfmt_autosave=1
-
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-        \ 'whitelist': ['rust'],
-        \ })
-endif
-
-" ----------------------------------------------
-"  vim-lsp customisation
-" ----------------------------------------------
-" this disables the autocomplete pop box appearing
-let g:asyncomplete_auto_popup = 0
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-
-" To enable preview window:
-" allow modifying the completeopt variable, or it will be overridden all the time
-let g:asyncomplete_auto_completeopt = 0
-"set completeopt=menuone,noinsert,noselect,preview
-set completeopt=menuone,noselect,preview
-
-" To auto close preview window when completion is done.
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" ----------------------------------------------
