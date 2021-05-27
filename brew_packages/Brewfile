@@ -18,6 +18,8 @@ brew "blueutil"
 brew "boost"
 # Core application library for C
 brew "glib"
+# Cross-platform make
+brew "cmake"
 # Configurable talking characters in ASCII art
 brew "cowsay"
 # Tool for browsing source code
@@ -70,6 +72,8 @@ brew "qt"
 brew "ripgrep"
 # Powerful, clean, object-oriented scripting language
 brew "ruby"
+# Command-line interface for https://speedtest.net bandwidth tests
+brew "speedtest-cli"
 # Version control system designed to be a better CVS
 brew "subversion"
 # Simplified and community-driven man pages
@@ -97,8 +101,6 @@ cask "font-fira-sans"
 cask "grammarly"
 # Media key forwarder for iTunes and Spotify
 cask "macmediakeyforwarder"
-# App to write, plan, collaborate, and get organized
-cask "notion"
 # File system integration
 cask "osxfuse"
 # IDE for application development

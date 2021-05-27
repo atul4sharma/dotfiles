@@ -99,3 +99,8 @@ set -x FZF_DEFAULT_OPTS "--height 40% --layout=reverse"
 #set -x FZF_DEFAULT_OPTS "--height 40% --layout=reverse --preview='bat --style=numbers --color=always --line-range :20 {}'"
 set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git" 
 
+
+#######################################
+# Added a tool compiledb to generate compile_commands.json for non-cmake systems
+# https://github.com/nickdiego/compiledb
+#######################################
