@@ -19,14 +19,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'dag/vim-fish'
 
-" -----------------------------------------
-" vim lsp 
-" -----------------------------------------
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" -----------------------------------------
+" lsp plugin
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
