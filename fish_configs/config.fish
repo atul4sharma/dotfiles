@@ -26,7 +26,7 @@ alias cr='cargo run'
 alias vp="vim -p"
 alias tmux="tmux -u"
 
-alias ...="cd ../../../"
+alias ...="cd ../../"
 
 ## git aliases
 alias gst="git status"
