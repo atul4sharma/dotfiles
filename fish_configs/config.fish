@@ -7,11 +7,11 @@ set -x CPPFLAGS "-I/usr/local/opt/llvm/include" $CPPFLAGS
 
 ## icu4c is keg-only, which means it was not symlinked into /usr/local,
 ## because macOS provides libicucore.dylib (but nothing else).
-## 
+##
 ## If you need to have icu4c first in your PATH run:
 ##   echo 'set -g fish_user_paths "/usr/local/opt/icu4c/bin" $fish_user_paths' >> ~/.config/fish/config.fish
 ##   echo 'set -g fish_user_paths "/usr/local/opt/icu4c/sbin" $fish_user_paths' >> ~/.config/fish/config.fish
-## 
+##
 ## For compilers to find icu4c you may need to set:
 ##   set -gx LDFLAGS "-L/usr/local/opt/icu4c/lib"
 ##   set -gx CPPFLAGS "-I/usr/local/opt/icu4c/include"
@@ -49,22 +49,22 @@ set -x GOPATH $GOPATH $HOME/code/go/development
 ########################################
 ## qt installation
 #
-#  steps done: 
+#  steps done:
 #  brew install qt
 #  brew link qt --force
 #  returned -> /usr/local/Cellar/qt/5.15.1
 #
 # qt is keg-only, which means it was not symlinked into /usr/local,
 # because Qt 5 has CMake issues when linked.
-# 
+#
 # If you need to have qt first in your PATH run:
 #   echo 'set -g fish_user_paths "/usr/local/opt/qt/bin" $fish_user_paths' >> ~/.config/fish/config.fish
 set -g fish_user_paths "/usr/local/opt/qt/bin" $fish_user_paths
-# 
+#
 # For compilers to find qt you may need to set:
 set -gx LDFLAGS "-L/usr/local/opt/qt/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/qt/include"
-# 
+#
 # For pkg-config to find qt you may need to set:
 set -gx PKG_CONFIG_PATH "/usr/local/opt/qt/lib/pkgconfig"
 #
@@ -95,9 +95,9 @@ set -gx CPPFLAGS "-I/usr/local/opt/binutils/include"
 
 #######################################
 # fzf default options
-set -x FZF_DEFAULT_OPTS "--height 40% --layout=reverse"
+set -x FZF_DEFAULT_OPTS "-m --height 40% --layout=reverse"
 #set -x FZF_DEFAULT_OPTS "--height 40% --layout=reverse --preview='bat --style=numbers --color=always --line-range :20 {}'"
-set -x FZF_DEFAULT_COMMAND "fd --type f --hidden --follow --exclude .git" 
+set -x FZF_DEFAULT_COMMAND "rg --files"
 
 
 #######################################
