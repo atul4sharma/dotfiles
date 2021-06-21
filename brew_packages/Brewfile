@@ -10,8 +10,6 @@ brew "ansible"
 brew "asciinema"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# GNU binary tools for native development
-brew "binutils"
 # Get/set bluetooth power and discoverable state
 brew "blueutil"
 # Collection of portable C++ source libraries
@@ -32,8 +30,6 @@ brew "docker-completion"
 brew "dust"
 # Read-only implementation of ext4 for FUSE
 brew "ext4fuse"
-# Simple, fast and user-friendly alternative to find
-brew "fd"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Play, record, convert, and stream audio and video
@@ -62,6 +58,10 @@ brew "librsvg"
 brew "links"
 # Next-gen compiler infrastructure
 brew "llvm"
+# Utility for managing network connections
+brew "netcat"
+# Rewrite of netcat that supports IPv6, plus other improvements
+brew "netcat6"
 # Read-write NTFS driver for FUSE
 brew "ntfs-3g"
 # Interpreted, interactive, object-oriented programming language
@@ -92,6 +92,8 @@ brew "wget"
 brew "youtube-dl"
 # Application launcher and productivity software
 cask "alfred"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
 # Web browser
 cask "firefox"
 cask "font-fira-code"
