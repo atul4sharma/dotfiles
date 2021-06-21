@@ -2,8 +2,13 @@
     "languageserver": {
         "clangd": {
             "command": "/usr/local/opt/llvm/bin/clangd",
-            "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+            "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".git/"],
+            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp", "h", "hpp"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/clang"
+                }
             }
         }
+    }
 }
