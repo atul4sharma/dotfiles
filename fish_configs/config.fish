@@ -53,6 +53,7 @@ set -x GOPATH $GOPATH $HOME/code/go/development
 #  brew install qt
 #  brew link qt --force
 #  returned -> /usr/local/Cellar/qt/5.15.1
+#  /usr/local/Cellar/qt/6.1.0_1
 #
 # qt is keg-only, which means it was not symlinked into /usr/local,
 # because Qt 5 has CMake issues when linked.
@@ -68,6 +69,29 @@ set -gx CPPFLAGS "-I/usr/local/opt/qt/include"
 # For pkg-config to find qt you may need to set:
 set -gx PKG_CONFIG_PATH "/usr/local/opt/qt/lib/pkgconfig"
 #
+########################################
+
+
+########################################
+## qt@5 installation
+#
+#  steps done:
+#  brew install qt@5
+#
+#qt@5 is keg-only, which means it was not symlinked into /usr/local,
+#because this is an alternate version of another formula.
+
+#If you need to have qt@5 first in your PATH, run:
+#echo 'fish_add_path /usr/local/opt/qt@5/bin' >> ~/.config/fish/config.fish
+
+#For compilers to find qt@5 you may need to set:
+set -gx LDFLAGS "-L/usr/local/opt/qt@5/lib"
+set -gx CPPFLAGS "-I/usr/local/opt/qt@5/include"
+
+#For pkg-config to find qt@5 you may need to set:
+set -gx PKG_CONFIG_PATH "/usr/local/opt/qt@5/lib/pkgconfig"
+#
+fish_add_path /usr/local/opt/qt@5/bin
 ########################################
 
 ########################################

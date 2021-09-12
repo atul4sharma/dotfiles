@@ -4,7 +4,7 @@ function invoke_gcc
     set -l filename (basename $cpp_file | string split -r -m1 .)[1]
     set -l out_file    $filename.$std_version.out
 
-    set -l build_cpp g++ -Wall -std=c++$std_version $cpp_file -o $out_file
+    set -l build_cpp g++ -Wall $argv[3..-1] -std=c++$std_version $cpp_file -o $out_file
     echo $build_cpp
     command $build_cpp
 
