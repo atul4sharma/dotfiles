@@ -121,7 +121,7 @@ set -gx CPPFLAGS "-I/usr/local/opt/binutils/include"
 # fzf default options
 set -x FZF_DEFAULT_OPTS "-m --height 40% --layout=reverse"
 #set -x FZF_DEFAULT_OPTS "--height 40% --layout=reverse --preview='bat --style=numbers --color=always --line-range :20 {}'"
-set -x FZF_DEFAULT_COMMAND "rg --files"
+set -x FZF_DEFAULT_COMMAND "rg --glob '!{llvm-project/*}' --glob '!{code/go/golib/*}' --glob '!{Movies/*}' --glob '!{Music/*}' --glob '!{Applications/*}' --files --color never"
 
 
 #######################################
