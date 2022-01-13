@@ -98,11 +98,10 @@ fish_add_path /usr/local/opt/qt@5/bin
 ## docker aliases to make application call easier
 #
 # https://github.com/asciinema/asciicast2gif
-alias asciicast2gif='docker run --rm -v /Users/atul/Documents/asciicast_recordings:/data asciinema/asciicast2gif'
-alias jupyter='docker run -v $HOME/:/home/jovyan --rm -p 8888:8888 jupyter/datascience-notebook'
-alias linux_gcc 'docker run -v $PWD/:/home/ --interactive --tty -w /home/ gcc /bin/bash'
+alias asciicast2gif 'docker run --rm -v $PWD/:/data --workdir /data asciinema/asciicast2gif'
+alias jupyter 'docker run --rm -v $HOME/:/home/jovyan --rm -p 8888:8888 jupyter/datascience-notebook'
+alias linux_gcc 'docker run --rm -v $PWD/:/home/ --interactive --tty -w /home/ gcc /bin/bash'
 ########################################
-
 
 # invoke_gcc is a custom function in ~/.config/fish/functions/
 alias g11 'invoke_gcc 11'
@@ -128,3 +127,18 @@ set -x FZF_DEFAULT_COMMAND "rg --glob '!{llvm-project/*}' --glob '!{code/go/goli
 # Added a tool compiledb to generate compile_commands.json for non-cmake systems
 # https://github.com/nickdiego/compiledb
 #######################################
+
+
+#######################################
+# Set PATH for ruby
+fish_add_path /usr/local/opt/ruby/bin
+#######################################
+#For compilers to find ruby you may need to set:
+#set -gx LDFLAGS "-L/usr/local/opt/ruby/lib"
+#set -gx CPPFLAGS "-I/usr/local/opt/ruby/include"
+#
+#For pkg-config to find ruby you may need to set:
+#set -gx PKG_CONFIG_PATH "/usr/local/opt/ruby/lib/pkgconfig"
+
+fish_add_path /Users/atul/.local/share/gem/ruby/3.0.0/bin
+#fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin/

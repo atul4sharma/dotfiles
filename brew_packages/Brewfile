@@ -4,6 +4,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "spl/pdftk"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
 # Record and share terminal sessions
@@ -18,14 +19,14 @@ brew "boost"
 brew "glib"
 # Cross-platform make
 brew "cmake"
-# Configurable talking characters in ASCII art
-brew "cowsay"
 # Tool for browsing source code
 brew "cscope"
 # Reimplementation of ctags(1)
 brew "ctags"
 # More intuitive version of du in rust
 brew "dust"
+# Prepare CD image files so they compress better
+brew "ecm"
 # Read-only implementation of ext4 for FUSE
 brew "ext4fuse"
 # Generate introspection data for GObject libraries
@@ -64,6 +65,8 @@ brew "llvm"
 brew "netcat"
 # Rewrite of netcat that supports IPv6, plus other improvements
 brew "netcat6"
+# Small build system for use with gyp or CMake
+brew "ninja"
 # Platform built on V8 to build network applications
 brew "node", link: false
 # Read-write NTFS driver for FUSE
@@ -76,6 +79,8 @@ brew "qt"
 brew "qt@5"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Powerful, clean, object-oriented scripting language
+brew "ruby"
 # Command-line interface for https://speedtest.net bandwidth tests
 brew "speedtest-cli"
 # Version control system designed to be a better CVS
@@ -109,8 +114,6 @@ cask "macmediakeyforwarder"
 cask "osxfuse"
 # IDE for application development
 cask "qt-creator"
-# Music streaming service
-cask "spotify"
 # Window manager
 cask "tiles"
 # Multimedia player
