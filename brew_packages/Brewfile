@@ -29,10 +29,10 @@ brew "dust"
 brew "ecm"
 # Read-only implementation of ext4 for FUSE
 brew "ext4fuse"
-# Generate introspection data for GObject libraries
-brew "gobject-introspection"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Generate introspection data for GObject libraries
+brew "gobject-introspection"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
@@ -61,6 +61,8 @@ brew "librsvg"
 brew "links"
 # Next-gen compiler infrastructure
 brew "llvm"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Utility for managing network connections
 brew "netcat"
 # Rewrite of netcat that supports IPv6, plus other improvements
@@ -114,6 +116,8 @@ cask "macmediakeyforwarder"
 cask "osxfuse"
 # IDE for application development
 cask "qt-creator"
+# Music streaming service
+cask "spotify"
 # Window manager
 cask "tiles"
 # Multimedia player

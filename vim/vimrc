@@ -4,7 +4,7 @@ source $HOME/.config/vim/vim_defaults.vim
 " My edits
 
 set expandtab
-set shiftwidth=4
+set shiftwidth=4 "this is the level of autoindent
 set softtabstop=4
 set tabstop=4
 set number
