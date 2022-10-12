@@ -24,6 +24,7 @@ alias cr='cargo run'
 # alias MAIN="cp -r /home/atul/cpp_practice_github/skeleton_code/ ./ && mv skeleton_code/* . && rmdir skeleton_code"
 
 alias vp="vim -p"
+alias v="nvim"
 alias tmux="tmux -u"
 
 alias ...="cd ../../"

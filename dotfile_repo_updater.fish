@@ -21,6 +21,7 @@ end
 
 set files_and_dirs_to_check \
     "$HOME/.vimrc,$DOTFILE_REPO/vim/vimrc" \
+    "$HOME/.config/nvim/init.vim,$DOTFILE_REPO/nvim/init.vim" \
     "$HOME/.config/alacritty/alacritty.yml,$DOTFILE_REPO/alacritty/alacritty.yml" \
     "$HOME/.tmux.conf,$DOTFILE_REPO/tmux/tmux.conf" \
     "$HOME/.gitconfig,$DOTFILE_REPO/git_configs/gitconfig" \
