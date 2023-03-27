@@ -7,6 +7,8 @@ tap "homebrew/services"
 tap "spl/pdftk"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
+# Download with resuming and segmented downloading
+brew "aria2"
 # Record and share terminal sessions
 brew "asciinema"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -17,6 +19,8 @@ brew "blueutil"
 brew "boost"
 # Core application library for C
 brew "glib"
+# Emacs dependency management
+brew "cask"
 # Cross-platform make
 brew "cmake"
 # Tool for browsing source code
@@ -31,8 +35,8 @@ brew "ecm"
 brew "ext4fuse"
 # OpenType text shaping engine
 brew "harfbuzz"
-# Generate introspection data for GObject libraries
-brew "gobject-introspection"
+# Framework for layout and rendering of i18n text
+brew "pango"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
@@ -47,14 +51,14 @@ brew "gdk-pixbuf"
 brew "git"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Generate introspection data for GObject libraries
+brew "gobject-introspection"
 # Colorize logfiles and command output
 brew "grc"
 # Improved top (interactive process viewer)
 brew "htop"
 # CLI wrapper for basic network utilities on macOS - ip command
 brew "iproute2mac"
-# Framework for layout and rendering of i18n text
-brew "pango"
 # Library to render SVG files using Cairo
 brew "librsvg"
 # Lynx-like WWW browser that supports tables, menus, etc.
@@ -73,6 +77,8 @@ brew "ninja"
 brew "node", link: false
 # Read-write NTFS driver for FUSE
 brew "ntfs-3g"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.8"
 # Cross-platform application and UI framework
@@ -95,6 +101,8 @@ brew "tmux"
 brew "tree"
 # Vi 'workalike' with many additional features
 brew "vim"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
 # Internet file retriever
 brew "wget"
 # Download YouTube videos from the command-line
@@ -105,6 +113,7 @@ cask "alfred"
 cask "basictex"
 # Web browser
 cask "firefox"
+# Free monospaced font with programming ligatures
 cask "font-fira-code"
 cask "font-fira-mono"
 cask "font-fira-sans"
@@ -116,6 +125,8 @@ cask "macmediakeyforwarder"
 cask "osxfuse"
 # IDE for application development
 cask "qt-creator"
+# Archive manager for data compression and backups
+cask "rar"
 # Music streaming service
 cask "spotify"
 # Window manager
