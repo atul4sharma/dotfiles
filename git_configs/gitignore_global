@@ -48,3 +48,8 @@ bin/*
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# To ignore for fzf #
+#####################
+Library
+Library/*

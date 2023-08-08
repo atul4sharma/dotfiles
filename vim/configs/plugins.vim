@@ -22,6 +22,10 @@ Plug 'dag/vim-fish'
 " lsp plugin
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" colorschems
+Plug 'tomasr/molokai'
+Plug 'sickill/vim-monokai'
+
 call plug#end()
 
 " airline theme

@@ -24,10 +24,12 @@ alias cr='cargo run'
 # alias MAIN="cp -r /home/atul/cpp_practice_github/skeleton_code/ ./ && mv skeleton_code/* . && rmdir skeleton_code"
 
 alias vp="vim -p"
-alias v="nvim"
+alias nv="nvim"
 alias tmux="tmux -u"
 
 alias ...="cd ../../"
+
+alias download="aria2c -s16 -x16"
 
 ## git aliases
 alias gst="git status"
@@ -143,3 +145,5 @@ fish_add_path /usr/local/opt/ruby/bin
 
 fish_add_path /Users/atul/.local/share/gem/ruby/3.0.0/bin
 #fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin/
+
+

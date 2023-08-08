@@ -107,6 +107,8 @@ brew "watch"
 brew "wget"
 # Download YouTube videos from the command-line
 brew "youtube-dl"
+# Password manager
+cask "1password-nightly"
 # Application launcher and productivity software
 cask "alfred"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX

@@ -13,7 +13,7 @@ font:
 
         style: Regular
 
-    size: 16.0
+    size: 13.0
 
 window:
   # Window dimensions (changes require restart)
