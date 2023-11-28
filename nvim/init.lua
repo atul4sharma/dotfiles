@@ -43,6 +43,12 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
   'nvim-tree/nvim-web-devicons',
   'iamcco/markdown-preview.nvim',
+  {
+    'nosduco/remote-sshfs.nvim',
+    dependencies = {
+      'nvim-telescope/telescope.nvim'
+    }
+  },
 
   -- Detect tabstop and shiftwidth automatically
   -- 'tpope/vim-sleuth',
@@ -65,7 +71,26 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
+  {
+    "nvim-neorg/neorg",
+    build = ":Neorg sync-parsers",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("neorg").setup {
+        load = {
+          ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.dirman"] = { -- Manages Neorg workspaces
+            config = {
+              workspaces = {
+                notes = "~/notes",
+              },
+            },
+          },
+        },
+      }
+    end,
+  },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -216,6 +241,79 @@ require("devcontainer").setup{
     },
   },
 }
+
+-- remote-sshfs setup START
+
+require('remote-sshfs').setup{
+  connections = {
+    ssh_configs = { -- which ssh configs to parse for hosts list
+      vim.fn.expand "$HOME" .. "/.ssh/config",
+      "/etc/ssh/ssh_config",
+      -- "/path/to/custom/ssh_config"
+    },
+    sshfs_args = { -- arguments to pass to the sshfs command
+      "-o reconnect",
+      "-o ConnectTimeout=5",
+    },
+  },
+  mounts = {
+    base_dir = vim.fn.expand "$HOME" .. "/.sshfs/", -- base directory for mount points
+    unmount_on_exit = true, -- run sshfs as foreground, will unmount on vim exit
+  },
+  handlers = {
+    on_connect = {
+      change_dir = true, -- when connected change vim working directory to mount point
+    },
+    on_disconnect = {
+      clean_mount_folders = false, -- remove mount point folder on disconnect/unmount
+    },
+    on_edit = {}, -- not yet implemented
+  },
+  ui = {
+    select_prompts = false, -- not yet implemented
+    confirm = {
+      connect = true, -- prompt y/n when host is selected to connect to
+      change_dir = true, -- prompt y/n to change working directory on connection (only applicable if handlers.on_connect.change_dir is enabled)
+    },
+  },
+  log = {
+    enable = true, -- enable logging
+    truncate = false, -- truncate logs
+    types = { -- enabled log types
+      all = true,
+      util = false,
+      handler = false,
+      sshfs = false,
+    },
+  },
+}
+
+local api = require('remote-sshfs.api')
+vim.keymap.set('n', '<leader>rc', api.connect, {desc = "[R]emote [C]onnect"})
+vim.keymap.set('n', '<leader>rd', api.disconnect, {desc = "[R]emote [D]isconnect"})
+vim.keymap.set('n', '<leader>re', api.edit, {desc = "[R]emote [E]dit ssh config"})
+
+-- (optional) Override telescope find_files and live_grep to make dynamic based on if connected to host
+local builtin = require("telescope.builtin")
+local connections = require("remote-sshfs.connections")
+vim.keymap.set("n", "<leader>ff", function()
+	if connections.is_connected then
+		api.find_files()
+	else
+		builtin.find_files()
+	end
+end, {desc = "FIXME: Remote [F]ind [F]iles"})
+vim.keymap.set("n", "<leader>fg", function()
+	if connections.is_connected then
+		api.live_grep()
+	else
+		builtin.live_grep()
+	end
+end, {desc = "FIXME: Remote live grep"})
+
+require('telescope').load_extension 'remote-sshfs'
+-- remote-sshfs setup END
+
 
 require("lualine").setup {
   sections = {
@@ -611,19 +709,7 @@ vim.keymap.set('n', '<Leader>wt', [[:%s/\s\+$//e<cr>]])
 -- Below mapping autoformat the code, but I don't know which format yet. So disabling it
 -- vim.keymap.set('n', '<Leader>wt', [[:lua vim.lsp.buf.format()<cr> <bar> :%s/\s\+$//e<cr>]])
 
---[[ Suggestions from Matt Gukowsky
-Nice! Yeah in order to get cmp-nvim-lsp working I had to do some massaging in my config... Here's what I did to get it working with clangd: https://bbgithub.dev.bloomberg.com/mgukowsky/dotfiles/blob/main/nvim/lua/50_lsp.lua#L147
-:34:22 Also did some configuration for the actual cmp-nvim-lsp plugin here: https://bbgithub.dev.bloomberg.com/mgukowsky/dotfiles/blob/main/nvim/lua/20_opts.lua#L146
---]]
-
 -- nvim-cmp configuration; from https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#safely-select-entries-with-cr
-
-local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
---
 
 -- Language Server configurations
 -- From nvim-lspconfig plugin
@@ -640,44 +726,6 @@ lspconfigs.pylsp.setup ({
   on_attach = on_attach,
   capabilities = nvimCmpCapabilities
 })
-
-local function readJsonFile(path)
-  local f = assert(io.open(path, "r"))
-  local content = f:read("*a")
-  f:close()
-  local config = vim.json.decode(content)
-  return config
-end
-
---[[
-local function runDevSFTP(directory, filepath)
-  print("Running dev-sftp")
-  local function onExit()
-    print("Exiting")
-  end
-  local function onStdout()
-    print("StdOut")
-  end
-  local job = vim.fn.jobstart(
-    'dev-sftp',
-    {
-      cwd = directory,
-      on_exit = onExit,
-      on_stdout = onStdout,
-    }
-  )
-end
---]]
-
-vim.api.nvim_create_user_command("SftpsyncFile", function (args)
-  local config = readJsonFile(".vscode/sftp.json")
-  --runDevSFTP(vim.loop.cwd(), ".")
-end, {
-    nargs = "*",
-    desc = "SFTP sync current open file",
-  }
-)
-
 
 -- vim.lsp.set_log_level("debug")
 
