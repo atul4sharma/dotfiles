@@ -354,9 +354,11 @@ vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+-- vim.o.mouse = 'a'
+vim.o.mouse = ''
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -663,9 +665,6 @@ set cursorcolumn
 set cursorline
 set matchpairs+=<:>
 ]])
-
-vim.opt.number = true
-vim.opt.relativenumber = true
 
 vim.opt.autoindent = true
 
