@@ -80,12 +80,23 @@ require('lazy').setup({
         load = {
           ["core.defaults"] = {}, -- Loads default behaviour
           ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.summary"] = {}, -- Summary module
           ["core.dirman"] = { -- Manages Neorg workspaces
             config = {
               workspaces = {
                 notes = "~/notes",
+                sample = "~/sample",
               },
             },
+          },
+          ["core.keybinds"] = {
+            config = {
+              defaults_keybinds = true,
+              hook = function(keybinds)
+                local myLeader = keybinds.leader
+                keybinds.map("norg", "n", myLeader .. "nx", "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_cycle<CR>")
+              end,
+            }
           },
         },
       }
@@ -223,14 +234,14 @@ require('lazy').setup({
 
 -- Setup nvim-dev-container
 require("devcontainer").setup{
-	autocommands = {
-		-- can be set to true to automatically start containers when devcontainer.json is available
-		init = false,
-		-- can be set to true to automatically remove any started containers and any built images when exiting vim
-		clean = false,
-		-- can be set to true to automatically restart containers when devcontainer.json file is updated
-		update = true,
-	},
+  autocommands = {
+    -- can be set to true to automatically start containers when devcontainer.json is available
+    init = false,
+    -- can be set to true to automatically remove any started containers and any built images when exiting vim
+    clean = false,
+    -- can be set to true to automatically restart containers when devcontainer.json file is updated
+    update = true,
+  },
   attach_mounts = {
     always = true,
     neovim_config = {
@@ -297,18 +308,18 @@ vim.keymap.set('n', '<leader>re', api.edit, {desc = "[R]emote [E]dit ssh config"
 local builtin = require("telescope.builtin")
 local connections = require("remote-sshfs.connections")
 vim.keymap.set("n", "<leader>ff", function()
-	if connections.is_connected then
-		api.find_files()
-	else
-		builtin.find_files()
-	end
+  if connections.is_connected then
+    api.find_files()
+  else
+    builtin.find_files()
+  end
 end, {desc = "FIXME: Remote [F]ind [F]iles"})
 vim.keymap.set("n", "<leader>fg", function()
-	if connections.is_connected then
-		api.live_grep()
-	else
-		builtin.live_grep()
-	end
+  if connections.is_connected then
+    api.live_grep()
+  else
+    builtin.live_grep()
+  end
 end, {desc = "FIXME: Remote live grep"})
 
 require('telescope').load_extension 'remote-sshfs'
@@ -354,11 +365,9 @@ vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
-vim.wo.relativenumber = true
 
 -- Enable mouse mode
--- vim.o.mouse = 'a'
-vim.o.mouse = ''
+vim.o.mouse = 'a'
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -666,6 +675,9 @@ set cursorline
 set matchpairs+=<:>
 ]])
 
+vim.opt.number = true
+vim.opt.relativenumber = true
+
 vim.opt.autoindent = true
 
 vim.opt.tabstop=4
@@ -707,6 +719,7 @@ vim.cmd('set colorcolumn=80')
 vim.keymap.set('n', '<Leader>wt', [[:%s/\s\+$//e<cr>]])
 -- Below mapping autoformat the code, but I don't know which format yet. So disabling it
 -- vim.keymap.set('n', '<Leader>wt', [[:lua vim.lsp.buf.format()<cr> <bar> :%s/\s\+$//e<cr>]])
+
 
 -- nvim-cmp configuration; from https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#safely-select-entries-with-cr
 
