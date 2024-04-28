@@ -72,9 +72,14 @@ require('lazy').setup({
     },
   },
   {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+  },
+  {
     "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { "luarocks.nvim" },
+    version = "*",
     config = function()
       require("neorg").setup {
         load = {
@@ -87,6 +92,7 @@ require('lazy').setup({
                 notes = "~/notes",
                 sample = "~/sample",
               },
+              default_workspace = "notes",
             },
           },
           ["core.keybinds"] = {
@@ -100,6 +106,9 @@ require('lazy').setup({
           },
         },
       }
+
+      vim.wo.foldlevel = 99
+      vim.wo.conceallevel = 2
     end,
   },
   {
@@ -252,6 +261,8 @@ require("devcontainer").setup{
     },
   },
 }
+
+require('neorg').setup()
 
 -- remote-sshfs setup START
 

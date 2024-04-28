@@ -104,6 +104,7 @@ fish_add_path /usr/local/opt/qt@5/bin
 alias asciicast2gif 'docker run --rm -v $PWD/:/data --workdir /data asciinema/asciicast2gif'
 alias jupyter 'docker run --rm -v $HOME/:/home/jovyan --rm -p 8888:8888 jupyter/datascience-notebook'
 alias linux_gcc 'docker run --rm -v $PWD/:/home/ --interactive --tty -w /home/ gcc /bin/bash'
+#alias valgrind='docker run -it -v $PWD:/tmp -w /tmp valgrind:1.0'
 ########################################
 
 # invoke_gcc is a custom function in ~/.config/fish/functions/
@@ -121,9 +122,11 @@ set -gx CPPFLAGS "-I/usr/local/opt/binutils/include"
 
 #######################################
 # fzf default options
+fzf --fish | source
 set -x FZF_DEFAULT_OPTS "-m --height 40% --layout=reverse"
 #set -x FZF_DEFAULT_OPTS "--height 40% --layout=reverse --preview='bat --style=numbers --color=always --line-range :20 {}'"
-set -x FZF_DEFAULT_COMMAND "rg --glob '!{llvm-project/*}' --glob '!{code/go/golib/*}' --glob '!{Movies/*}' --glob '!{Music/*}' --glob '!{Applications/*}' --files --color never"
+#set -x FZF_DEFAULT_COMMAND "rg --glob '!{llvm-project/*}' --glob '!{code/go/golib/*}' --glob '!{Movies/*}' --glob '!{Music/*}' --glob '!{Applications/*}' --files --color never"
+set -x FZF_DEFAULT_COMMAND "fd --follow ."
 
 
 #######################################

@@ -9,7 +9,7 @@ font:
         #   - Linux monospace
         #   - Windows Consolas
         # The font 'Fira Code' has to be downloaded for this setting to work.
-        family: 'Fira Code'
+        family: 'FiraCode Nerd Font'
 
         style: Regular
 
