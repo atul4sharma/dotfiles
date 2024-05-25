@@ -83,26 +83,15 @@ require('lazy').setup({
     config = function()
       require("neorg").setup {
         load = {
-          ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.defaults"] = {}, -- Loads default behavior
           ["core.concealer"] = {}, -- Adds pretty icons to your documents
-          ["core.summary"] = {}, -- Summary module
-          ["core.dirman"] = { -- Manages Neorg workspaces
+          ["core.dirman"] = { -- Manages Neorg workspace
             config = {
               workspaces = {
                 notes = "~/notes",
-                sample = "~/sample",
               },
               default_workspace = "notes",
             },
-          },
-          ["core.keybinds"] = {
-            config = {
-              defaults_keybinds = true,
-              hook = function(keybinds)
-                local myLeader = keybinds.leader
-                keybinds.map("norg", "n", myLeader .. "nx", "<cmd>Neorg keybind norg core.qol.todo_items.todo.task_cycle<CR>")
-              end,
-            }
           },
         },
       }
@@ -376,9 +365,11 @@ vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+-- vim.o.mouse = 'a'
+vim.o.mouse = ''
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -586,7 +577,7 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-clangd = {},
+  clangd = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
@@ -686,9 +677,6 @@ set cursorline
 set matchpairs+=<:>
 ]])
 
-vim.opt.number = true
-vim.opt.relativenumber = true
-
 vim.opt.autoindent = true
 
 vim.opt.tabstop=4
@@ -730,7 +718,6 @@ vim.cmd('set colorcolumn=80')
 vim.keymap.set('n', '<Leader>wt', [[:%s/\s\+$//e<cr>]])
 -- Below mapping autoformat the code, but I don't know which format yet. So disabling it
 -- vim.keymap.set('n', '<Leader>wt', [[:lua vim.lsp.buf.format()<cr> <bar> :%s/\s\+$//e<cr>]])
-
 
 -- nvim-cmp configuration; from https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#safely-select-entries-with-cr
 
