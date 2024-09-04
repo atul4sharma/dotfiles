@@ -6,7 +6,7 @@
 	color = true
 
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = /Users/atul/.gitignore_global
 	autocrlf = false
 	filemode = false

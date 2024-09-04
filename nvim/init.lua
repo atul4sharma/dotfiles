@@ -76,6 +76,7 @@ require('lazy').setup({
     priority = 1000,
     config = true,
   },
+  { "L3MON4D3/LuaSnip", run = "make install_jsregexp" },
   {
     "nvim-neorg/neorg",
     dependencies = { "luarocks.nvim" },
@@ -577,7 +578,7 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  clangd = {},
+clangd = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},

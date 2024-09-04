@@ -26,6 +26,8 @@ brew "glib"
 brew "cairo"
 # OpenType text shaping engine
 brew "harfbuzz"
+# Development kit for the Java programming language
+brew "openjdk@11"
 # Google's own build tool
 brew "bazel"
 # GNU binary tools for native development
@@ -50,8 +52,6 @@ brew "ecm"
 brew "ext4fuse"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# GNU compiler collection
-brew "gcc"
 # Framework for layout and rendering of i18n text
 brew "pango"
 # OCR (Optical Character Recognition) engine
@@ -62,6 +62,8 @@ brew "ffmpeg"
 brew "fish"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU compiler collection
+brew "gcc"
 # GNU debugger
 brew "gdb"
 # Toolkit for image loading and pixel buffer manipulation
@@ -106,12 +108,12 @@ brew "python@3.11"
 brew "python@3.8"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.9"
+# Pure Python Vim clone
+brew "pyvim"
 # Cross-platform application and UI framework
 brew "qt"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Powerful, clean, object-oriented scripting language
-brew "ruby"
 # Command-line interface for https://speedtest.net bandwidth tests
 brew "speedtest-cli"
 # Version control system designed to be a better CVS
@@ -133,7 +135,9 @@ brew "youtube-dl"
 # Dynamic analysis tools (memory, debug, profiling)
 brew "louisbrunner/valgrind/valgrind", args: ["HEAD"]
 # Password manager
-cask "1password-nightly"
+cask "1password@nightly"
+# GPU-accelerated terminal emulator
+cask "alacritty"
 # Application launcher and productivity software
 cask "alfred"
 # Tools for building Android applications
@@ -144,9 +148,7 @@ cask "basictex"
 cask "brave-browser"
 # Web browser
 cask "firefox"
-# Free monospaced font with programming ligatures
 cask "font-fira-code"
-# Developer targeted fonts with a high number of glyphs
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono"
 cask "font-fira-sans"
@@ -164,6 +166,8 @@ cask "qt-creator"
 cask "rar"
 # Music streaming service
 cask "spotify"
+# LaTeX editor
+cask "texstudio"
 # Window manager
 cask "tiles"
 # Multimedia player

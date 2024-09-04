@@ -1,0 +1,164 @@
+
+[colors.bright]
+black = "#666666"
+blue = "#819AFF"
+cyan = "#66D9EF"
+green = "#A6E22E"
+magenta = "#AE81FF"
+red = "#F92672"
+white = "#F8F8F2"
+yellow = "#E2E22E"
+
+[colors.normal]
+black = "#333333"
+blue = "#6A7EC8"
+cyan = "#56ADBC"
+green = "#86B42B"
+magenta = "#8C6BC8"
+red = "#C4265E"
+white = "#E3E3DD"
+yellow = "#B3B42B"
+
+[colors.primary]
+background = "#1B1D1E"
+foreground = "#F8F8F2"
+
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+[font]
+size = 13.0
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "Return"
+mods = "Command"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Right"
+
+[schemes.molokai_dark.bright]
+black = "#666666"
+blue = "#819AFF"
+cyan = "#66D9EF"
+green = "#A6E22E"
+magenta = "#AE81FF"
+red = "#F92672"
+white = "#F8F8F2"
+yellow = "#E2E22E"
+
+[schemes.molokai_dark.normal]
+black = "#333333"
+blue = "#6A7EC8"
+cyan = "#56ADBC"
+green = "#86B42B"
+magenta = "#8C6BC8"
+red = "#C4265E"
+white = "#E3E3DD"
+yellow = "#B3B42B"
+
+[schemes.molokai_dark.primary]
+background = "#1B1D1E"
+foreground = "#F8F8F2"
+
+[schemes.monokai_dark.bright]
+black = "#75715E"
+blue = "#66D9EF"
+cyan = "#A1EFE4"
+green = "#A6E22E"
+magenta = "#AE81FF"
+red = "#F92672"
+white = "#F9F8F5"
+yellow = "#F4BF75"
+
+[schemes.monokai_dark.normal]
+black = "#272822"
+blue = "#66D9EF"
+cyan = "#A1EFE4"
+green = "#A6E22E"
+magenta = "#AE81FF"
+red = "#F92672"
+white = "#F8F8F2"
+yellow = "#F4BF75"
+
+[schemes.monokai_dark.primary]
+background = "#272822"
+foreground = "#F8F8F2"
+
+[schemes.oceanic_next.bright]
+black = "#343d46"
+blue = "#6699cc"
+cyan = "#5fb3b3"
+green = "#99C794"
+magenta = "#c594c5"
+red = "#EC5f67"
+white = "#d8dee9"
+yellow = "#FAC863"
+
+[schemes.oceanic_next.cursor]
+cursor = "#ffffff"
+text = "#1b2b34"
+
+[schemes.oceanic_next.normal]
+black = "#343d46"
+blue = "#6699cc"
+cyan = "#5fb3b3"
+green = "#99C794"
+magenta = "#c594c5"
+red = "#EC5f67"
+white = "#d8dee9"
+yellow = "#FAC863"
+
+[schemes.oceanic_next.primary]
+background = "#1b2b34"
+foreground = "#d8dee9"
+
+[schemes.solarized_light.bright]
+black = "#002b36"
+blue = "#839496"
+cyan = "#93a1a1"
+green = "#586e75"
+magenta = "#6c71c4"
+red = "#cb4b16"
+white = "#fdf6e3"
+yellow = "#657b83"
+
+[schemes.solarized_light.cursor]
+cursor = "#657b83"
+text = "#fdf6e3"
+
+[schemes.solarized_light.normal]
+black = "#073642"
+blue = "#268bd2"
+cyan = "#2aa198"
+green = "#859900"
+magenta = "#d33682"
+red = "#dc322f"
+white = "#eee8d5"
+yellow = "#b58900"
+
+[schemes.solarized_light.primary]
+background = "#fdf6e3"
+foreground = "#657b83"
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|\"' ()[]{}<>"
+
+[window.dimensions]
+columns = 80
+lines = 100
+
+[window.padding]
+x = 5
+y = 5
+
+[window.position]
+x = 0
+y = 0

@@ -22,7 +22,7 @@ end
 set files_and_dirs_to_check \
     "$HOME/.vimrc,$DOTFILE_REPO/vim/vimrc" \
     "$HOME/.config/nvim/init.lua,$DOTFILE_REPO/nvim/init.lua" \
-    "$HOME/.config/alacritty/alacritty.yml,$DOTFILE_REPO/alacritty/alacritty.yml" \
+    "$HOME/.config/alacritty/alacritty.toml,$DOTFILE_REPO/alacritty/alacritty.toml" \
     "$HOME/.tmux.conf,$DOTFILE_REPO/tmux/tmux.conf" \
     "$HOME/.gitconfig,$DOTFILE_REPO/git_configs/gitconfig" \
     "$HOME/.gitignore_global,$DOTFILE_REPO/git_configs/gitignore_global" \
