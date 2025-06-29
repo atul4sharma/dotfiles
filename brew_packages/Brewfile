@@ -110,6 +110,8 @@ brew "python@3.8"
 brew "python@3.9"
 # Pure Python Vim clone
 brew "pyvim"
+# Tools for and transforming and inspecting PDF files
+brew "qpdf"
 # Cross-platform application and UI framework
 brew "qt"
 # Search tool like grep and The Silver Searcher
@@ -132,6 +134,8 @@ brew "watch"
 brew "wget"
 # Download YouTube videos from the command-line
 brew "youtube-dl"
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
 # Dynamic analysis tools (memory, debug, profiling)
 brew "louisbrunner/valgrind/valgrind", args: ["HEAD"]
 # Password manager
