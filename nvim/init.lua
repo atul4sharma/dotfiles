@@ -43,13 +43,6 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
   'nvim-tree/nvim-web-devicons',
   'iamcco/markdown-preview.nvim',
-  {
-    'nosduco/remote-sshfs.nvim',
-    dependencies = {
-      'nvim-telescope/telescope.nvim'
-    }
-  },
-
   -- Detect tabstop and shiftwidth automatically
   -- 'tpope/vim-sleuth',
 
@@ -77,8 +70,11 @@ require('lazy').setup({
   },
   {
     "vhyrro/luarocks.nvim",
-    priority = 1000,
-    config = true,
+    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+    opts = {
+      rocks = { hererocks = false}, -- specifies a list of rocks to install
+      -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
+    },
   },
   { "L3MON4D3/LuaSnip", run = "make install_jsregexp" },
   {
@@ -159,11 +155,6 @@ require('lazy').setup({
       vim.g.lastplace_ignore = "gitcommit,gitrebase,svn,hgcommit"
     end,
   },
-
-  {
-    'esensar/nvim-dev-container'
-  },
-
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -619,19 +610,7 @@ local lspconfigs = require("lspconfig")
 -- nvim-cmp; needs to be set as the "capabilities for each lsp"
 local nvimCmpCapabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- lspconfigs.clangd.setup({
---   on_attach = on_attach,
---   capabilities = nvimCmpCapabilities,
--- })
--- lspconfigs.pylsp.setup ({
---   on_attach = on_attach,
---   capabilities = nvimCmpCapabilities
--- })
-
 -- vim.lsp.set_log_level("debug")
-
--- simulate ide-magic image buildling
--- docker-compose -f .dev-compose.yml -f .devcontainer/docker-compose.yml build --pull dev
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
