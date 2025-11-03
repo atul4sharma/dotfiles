@@ -11,6 +11,9 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- :Explore
+vim.cmd("let g:netrw_liststyle = 3")
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -42,9 +45,22 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
   'nvim-tree/nvim-web-devicons',
-  'iamcco/markdown-preview.nvim',
+  {
+      "OXY2DEV/markview.nvim",
+      lazy = false,
+      -- For blink.cmp's completion
+      -- source
+      -- dependencies = {
+      --     "saghen/blink.cmp"
+      -- },
+  },
+  {
+    'eriks47/generate.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }
+  },
+
   -- Detect tabstop and shiftwidth automatically
-  -- 'tpope/vim-sleuth',
+  {'tpope/vim-sleuth',},
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -52,6 +68,10 @@ require('lazy').setup({
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
+      -- Automatically install LSPs to stdpath for neovim
+      { 'mason-org/mason.nvim', config = true },
+      'mason-org/mason-lspconfig.nvim',
+
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
@@ -60,47 +80,12 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-  {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {},
-    dependencies = {
-        { "mason-org/mason.nvim", opts = {} },
-        "neovim/nvim-lspconfig",
-    },
-  },
-  {
-    "vhyrro/luarocks.nvim",
-    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-    opts = {
-      rocks = { hererocks = false}, -- specifies a list of rocks to install
-      -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
-    },
-  },
-  { "L3MON4D3/LuaSnip", run = "make install_jsregexp" },
-  {
-    "nvim-neorg/neorg",
-    dependencies = { "luarocks.nvim" },
-    version = "*",
-    config = function()
-      require("neorg").setup {
-        load = {
-          ["core.defaults"] = {}, -- Loads default behavior
-          ["core.concealer"] = {}, -- Adds pretty icons to your documents
-          ["core.dirman"] = { -- Manages Neorg workspace
-            config = {
-              workspaces = {
-                notes = "~/notes",
-              },
-              default_workspace = "notes",
-            },
-          },
-        },
-      }
-
-      vim.wo.foldlevel = 99
-      vim.wo.conceallevel = 2
-    end,
-  },
+  -- {
+  --   "nvim-neorg/neorg",
+  --   lazy = true,
+  --   version = "*",
+  --   config = true
+  -- },
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -114,6 +99,49 @@ require('lazy').setup({
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
+    },
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function()
+      local dap, dapui = require("dap"), require("dapui")
+
+      dap.adapters.gdb = {
+        type = "executable",
+        command = "gdb",
+        args = { "--interpreter=dap", "--eval-command", "set print pretty on" },
+      }
+
+      dapui.setup()
+
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+
+      vim.keymap.set('n', '<Leader>db', dap.toggle_breakpoint, {desc = '[D]ebugger: Toggle [B]reakpoint' })
+      vim.keymap.set('n', '<Leader>dc', dap.continue, {desc = '[D]ebugger: [C]ontinue. This will start our debugging with nvim-dap'})
+    end,
+  },
+
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    dependencies = {
+      {"mason-org/mason.nvim",},
+      {"mfussenegger/nvim-dap",},
     },
   },
 
@@ -209,6 +237,9 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+  },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -225,8 +256,13 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
+-- require("neorg").setup({
+--   load = {
+--     ["core.defaults"] = {},
+--     ["core.concealer"] = {}, -- We added this line!
+--   }
+-- })
 
-require('neorg').setup()
 
 require("lualine").setup {
   sections = {
@@ -241,20 +277,58 @@ require("lualine").setup {
 }
 
 
-local highlight = {
-  "CursorColumn",
-  "Whitespace"
-}
+-- Indent style
+local enable_rainbow_color_indent = false
+local highlight = {}
+local hooks = require "ibl.hooks"
 
-require("ibl").setup {
-  indent = { highlight = highlight, char = "" },
-  whitespace = {
-    highlight = highlight,
-    remove_blankline_trail = false,
-  },
-  scope = { enabled = false },
-}
+local function modify_indent_style()
+  if enable_rainbow_color_indent then
+    highlight = {
+      "RainbowRed",
+      "RainbowYellow",
+      "RainbowBlue",
+      "RainbowOrange",
+      "RainbowGreen",
+      "RainbowViolet",
+      "RainbowCyan",
+    }
 
+    -- create the highlight groups in the highlight setup hook, so they are reset
+    -- every time the colorscheme changes
+    hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+      vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+      vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+      vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+      vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+      vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+      vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+      vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+    end)
+
+    require("ibl").setup { indent = { highlight = highlight } }
+  else
+    highlight = {
+      "CursorColumn",
+      "Whitespace"
+    }
+
+    require("ibl").setup {
+      indent = { highlight = highlight, char = "" },
+      whitespace = {
+        highlight = highlight,
+        remove_blankline_trail = false,
+      },
+      scope = { enabled = false },
+    }
+  end
+  enable_rainbow_color_indent = not enable_rainbow_color_indent
+end
+
+-- Initial indent style
+modify_indent_style()
+
+vim.keymap.set('n', '<F3>', modify_indent_style)
 
 
 -- [[ Setting options ]]
@@ -267,10 +341,8 @@ vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
-vim.wo.relativenumber = true
 
--- Enable mouse mode
--- vim.o.mouse = 'a'
+-- Disable mouse mode
 vim.o.mouse = ''
 
 -- Sync clipboard between OS and Neovim.
@@ -279,7 +351,7 @@ vim.o.mouse = ''
 -- vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
-vim.o.breakindent = true
+-- vim.o.breakindent = true
 
 -- Save undo history
 vim.o.undofile = false
@@ -323,6 +395,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    path_display = { "smart" },
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -357,7 +430,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'jsonc', 'lua', 'python', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'lua', 'python', 'javascript', 'typescript', 'vimdoc', 'vim', 'yaml' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -417,6 +490,22 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
+}
+
+require'treesitter-context'.setup{
+  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+  multiwindow = false, -- Enable multiwindow support.
+  max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+  min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+  line_numbers = true,
+  multiline_threshold = 20, -- Maximum number of lines to show for a single context
+  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+  mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+  -- Separator between context and content. Should be a single character string, like '-'.
+  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+  separator = '-',
+  zindex = 20, -- The Z-index of the context window
+  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
 -- Diagnostic keymaps
@@ -479,7 +568,7 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-clangd = {},
+  clangd = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
@@ -500,6 +589,42 @@ require('neodev').setup()
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
+})
+
+require("mason-nvim-dap").setup()
+
+-- Language Server configurations
+-- From nvim-lspconfig plugin
+local lspconfigs = require("lspconfig")
+
+-- nvim-cmp; needs to be set as the "capabilities for each lsp"
+local nvimCmpCapabilities = require('cmp_nvim_lsp').default_capabilities()
+
+vim.lsp.config('clangd', {
+  on_attach = on_attach,
+  capabilities = nvimCmpCapabilities,
+})
+vim.lsp.config('pylsp', {
+  on_attach = on_attach,
+  capabilities = nvimCmpCapabilities
+})
+
+-- Ensure the servers above are installed
+local mason_lspconfig = require("mason-lspconfig")
+
+mason_lspconfig.setup {
+  ensure_installed = {"clangd", "pylsp", "lua_ls"},
+  automatic_enable = true,
+}
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
@@ -559,12 +684,14 @@ set cursorline
 set matchpairs+=<:>
 ]])
 
-vim.opt.autoindent = true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
-vim.opt.tabstop=4
-vim.opt.shiftwidth=4 -- this is the level of autoindent
-vim.opt.softtabstop=4
-vim.opt.expandtab = true
+vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
+vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
+vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
+-- vim.opt.autoindent=true
 
 ------------------------------------------------------
 -- General keymap
@@ -580,10 +707,10 @@ vim.keymap.set('n', '<F2>',
 vim.cmd('nnoremap <F9>  gT')
 vim.cmd('nnoremap <F10> gt')
 
-vim.cmd('nnoremap <c-j> <c-w>j')
-vim.cmd('nnoremap <c-h> <c-w>h')
-vim.cmd('nnoremap <c-k> <c-w>k')
-vim.cmd('nnoremap <c-l> <c-w>l')
+vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
+vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
+vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
+vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 
 
 -- resize current buffer by +/- 2 (used in split windows)
@@ -594,23 +721,60 @@ vim.cmd('nnoremap <M-up> :resize -2<cr>')
 vim.cmd('nnoremap <M-right> :vertical resize +2<cr>')
 
 vim.cmd('highlight ColorColumn ctermbg=gray')
-vim.cmd('set colorcolumn=80')
+vim.cmd('set colorcolumn=100')
 
 ---
 vim.keymap.set('n', '<Leader>wt', [[:%s/\s\+$//e<cr>]])
 -- Below mapping autoformat the code, but I don't know which format yet. So disabling it
 -- vim.keymap.set('n', '<Leader>wt', [[:lua vim.lsp.buf.format()<cr> <bar> :%s/\s\+$//e<cr>]])
 
+
 -- nvim-cmp configuration; from https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#safely-select-entries-with-cr
 
--- Language Server configurations
--- From nvim-lspconfig plugin
-local lspconfigs = require("lspconfig")
+-- nvim-dap gdb config setup for c++
+local dap = require("dap")
+dap.configurations.c = {
+  {
+    name = "Launch",
+    type = "gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = false,
+  },
+  {
+    name = "Select and attach to process",
+    type = "gdb",
+    request = "attach",
+    program = function()
+       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    pid = function()
+       local name = vim.fn.input('Executable name (filter): ')
+       return require("dap.utils").pick_process({ filter = name })
+    end,
+    cwd = '${workspaceFolder}'
+  },
+  {
+    name = 'Attach to gdbserver :1234',
+    type = 'gdb',
+    request = 'attach',
+    target = 'localhost:1234',
+    program = function()
+       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}'
+  },
+}
+dap.configurations.cpp = dap.configurations.c
 
--- nvim-cmp; needs to be set as the "capabilities for each lsp"
-local nvimCmpCapabilities = require('cmp_nvim_lsp').default_capabilities()
 
--- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("debug")
+
+-- simulate ide-magic image buildling
+-- docker-compose -f .dev-compose.yml -f .devcontainer/docker-compose.yml build --pull dev
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
