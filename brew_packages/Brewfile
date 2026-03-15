@@ -1,6 +1,4 @@
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "louisbrunner/valgrind"
 tap "spl/pdftk"
@@ -8,6 +6,8 @@ tap "spl/pdftk"
 brew "pycparser"
 # C Foreign Function Interface for Python
 brew "cffi"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
 # New file format for still image compression
@@ -26,8 +26,6 @@ brew "glib"
 brew "cairo"
 # OpenType text shaping engine
 brew "harfbuzz"
-# Development kit for the Java programming language
-brew "openjdk@11"
 # Google's own build tool
 brew "bazel"
 # GNU binary tools for native development
@@ -52,11 +50,7 @@ brew "ecm"
 brew "ext4fuse"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# Framework for layout and rendering of i18n text
-brew "pango"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
-# Play, record, convert, and stream audio and video
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
@@ -68,6 +62,8 @@ brew "gcc"
 brew "gdb"
 # Toolkit for image loading and pixel buffer manipulation
 brew "gdk-pixbuf"
+# GitHub command-line tool
+brew "gh"
 # Distributed revision control system
 brew "git"
 # Open source programming language to build simple/reliable/efficient software
@@ -80,14 +76,20 @@ brew "python@3.10"
 brew "grc"
 # Improved top (interactive process viewer)
 brew "htop"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@77"
 # CLI wrapper for basic network utilities on macOS - ip command
 brew "iproute2mac"
+# Framework for layout and rendering of i18n text
+brew "pango"
 # Library to render SVG files using Cairo
 brew "librsvg"
 # Lynx-like WWW browser that supports tables, menus, etc.
 brew "links"
 # Next-gen compiler infrastructure
 brew "llvm"
+# Just-In-Time Compiler (JIT) for the Lua programming language
+brew "luajit"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Utility for managing network connections
@@ -96,18 +98,14 @@ brew "netcat"
 brew "netcat6"
 # Small build system for use with gyp or CMake
 brew "ninja"
-# Platform built on V8 to build network applications
+# Open-source, cross-platform JavaScript runtime environment
 brew "node", link: false
 # Read-write NTFS driver for FUSE
 brew "ntfs-3g"
+# Development kit for the Java programming language
+brew "openjdk@11"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.11"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.8"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
 # Pure Python Vim clone
 brew "pyvim"
 # Tools for and transforming and inspecting PDF files
@@ -120,22 +118,18 @@ brew "ripgrep"
 brew "speedtest-cli"
 # Version control system designed to be a better CVS
 brew "subversion"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Simplified and community-driven man pages
 brew "tldr"
 # Terminal multiplexer
 brew "tmux"
-# Display directories as trees (with optional color/HTML output)
-brew "tree"
 # Vi 'workalike' with many additional features
 brew "vim"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Internet file retriever
 brew "wget"
-# Download YouTube videos from the command-line
-brew "youtube-dl"
-# Feature-rich command-line audio/video downloader
-brew "yt-dlp"
 # Dynamic analysis tools (memory, debug, profiling)
 brew "louisbrunner/valgrind/valgrind", args: ["HEAD"]
 # Password manager
@@ -150,6 +144,8 @@ cask "android-studio"
 cask "basictex"
 # Web browser focusing on privacy
 cask "brave-browser"
+# E-books management software
+cask "calibre"
 # Web browser
 cask "firefox"
 cask "font-fira-code"

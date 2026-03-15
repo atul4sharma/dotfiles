@@ -149,4 +149,6 @@ fish_add_path /usr/local/opt/ruby/bin
 fish_add_path /Users/atul/.local/share/gem/ruby/3.0.0/bin
 #fish_add_path /usr/local/lib/ruby/gems/3.0.0/bin/
 
+fish_add_path /usr/local/bin/
+fish_add_path $HOME/.local/bin
 
