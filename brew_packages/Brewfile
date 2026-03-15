@@ -14,8 +14,6 @@ brew "ansible"
 brew "jpeg-xl"
 # Codec library for encoding and decoding AV1 video streams
 brew "aom"
-# Download with resuming and segmented downloading
-brew "aria2"
 # Record and share terminal sessions
 brew "asciinema"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -50,8 +48,6 @@ brew "ecm"
 brew "ext4fuse"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# Play, record, convert, and stream select audio and video codecs
-brew "ffmpeg"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
 # Command-line fuzzy finder written in Go
@@ -84,34 +80,24 @@ brew "iproute2mac"
 brew "pango"
 # Library to render SVG files using Cairo
 brew "librsvg"
-# Lynx-like WWW browser that supports tables, menus, etc.
-brew "links"
 # Next-gen compiler infrastructure
 brew "llvm"
 # Just-In-Time Compiler (JIT) for the Lua programming language
 brew "luajit"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Utility for managing network connections
-brew "netcat"
-# Rewrite of netcat that supports IPv6, plus other improvements
-brew "netcat6"
 # Small build system for use with gyp or CMake
 brew "ninja"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node", link: false
 # Read-write NTFS driver for FUSE
 brew "ntfs-3g"
-# Development kit for the Java programming language
-brew "openjdk@11"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # Pure Python Vim clone
 brew "pyvim"
 # Tools for and transforming and inspecting PDF files
 brew "qpdf"
-# Cross-platform application and UI framework
-brew "qt"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Command-line interface for https://speedtest.net bandwidth tests
@@ -124,18 +110,16 @@ brew "tesseract"
 brew "tldr"
 # Terminal multiplexer
 brew "tmux"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
 # Vi 'workalike' with many additional features
 brew "vim"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
-# Internet file retriever
-brew "wget"
 # Dynamic analysis tools (memory, debug, profiling)
 brew "louisbrunner/valgrind/valgrind", args: ["HEAD"]
 # Password manager
 cask "1password@nightly"
-# GPU-accelerated terminal emulator
-cask "alacritty"
 # Application launcher and productivity software
 cask "alfred"
 # Tools for building Android applications
@@ -146,8 +130,6 @@ cask "basictex"
 cask "brave-browser"
 # E-books management software
 cask "calibre"
-# Web browser
-cask "firefox"
 cask "font-fira-code"
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono"
@@ -160,12 +142,8 @@ cask "keymapp"
 cask "macmediakeyforwarder"
 # File system integration
 cask "osxfuse"
-# IDE for application development
-cask "qt-creator"
 # Archive manager for data compression and backups
 cask "rar"
-# Music streaming service
-cask "spotify"
 # LaTeX editor
 cask "texstudio"
 # Window manager
