@@ -1,5 +1,4 @@
 
-
 ## These were mentioned by the llvm installation
 set -x PATH /usr/local/opt/llvm/bin $PATH
 set -x LDFLAGS "-L/usr/local/opt/llvm/lib" $LDFLAGS
@@ -39,15 +38,8 @@ alias glog="git log --pretty=format:'%C(bold blue)%><(10)%h %C(green)%<(15)%cr %
 alias gcm="git checkout master"
 alias gl="glog -20"
 
-## golang paths
-## https://medium.com/@jimkang/install-go-on-mac-with-homebrew-5fa421fc55f5
-set -x GOROOT (brew --prefix golang)/libexec
-set -x PATH $PATH {$GOROOT}/bin
-## this is for golibraries
-set -x GOPATH $HOME/code/go/golib
-set -x PATH $PATH {$GOPATH}/bin
-## this is for my local binaries
-set -x GOPATH $GOPATH $HOME/code/go/development
+# For claude code
+set -x PATH $PATH $HOME/.local/bin
 
 ########################################
 ## qt installation
@@ -152,3 +144,5 @@ fish_add_path /Users/atul/.local/share/gem/ruby/3.0.0/bin
 fish_add_path /usr/local/bin/
 fish_add_path $HOME/.local/bin
 
+# New brew install
+eval "$(/opt/homebrew/bin/brew shellenv fish)"
