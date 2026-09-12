@@ -74,20 +74,14 @@ brew "neovim"
 brew "ninja"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node", link: false
-# Swiss-army knife of markup format conversion
-brew "pandoc"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.10"
-# Pure Python Vim clone
-brew "pyvim"
 # Tools for and transforming and inspecting PDF files
 brew "qpdf"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Version control system designed to be a better CVS
-brew "subversion"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
+# Official tldr client written in Rust
+brew "tlrc"
 # Terminal multiplexer
 brew "tmux"
 # Extremely fast Python package installer and resolver, written in Rust
@@ -96,6 +90,8 @@ brew "uv"
 brew "vim"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
 # Password manager
 cask "1password@nightly"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX
@@ -109,7 +105,5 @@ cask "font-fira-mono"
 cask "font-fira-sans"
 # ZSA keyboard firmware flasher
 cask "keymapp"
-# Media key forwarder for Apple Music and Spotify
-cask "macmediakeyforwarder"
 # Window manager
 cask "tiles"
