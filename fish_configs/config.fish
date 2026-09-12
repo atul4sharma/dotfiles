@@ -146,3 +146,6 @@ fish_add_path $HOME/.local/bin
 
 # New brew install
 eval "$(/opt/homebrew/bin/brew shellenv fish)"
+
+# Pin SDKROOT: CLT's MacOSX27.0.sdk is broken and breaks native builds. Remove once Apple fixes it.
+set -gx SDKROOT /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk
