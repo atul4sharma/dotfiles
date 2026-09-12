@@ -39,7 +39,7 @@ alias gcm="git checkout master"
 alias gl="glog -20"
 
 # For claude code
-set -x PATH $PATH $HOME/.local/bin
+fish_add_path $HOME/.local/bin
 
 ########################################
 ## qt installation
