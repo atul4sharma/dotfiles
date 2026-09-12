@@ -62,7 +62,7 @@ end
 function update_brewfile
     printf '\n\n*************** Updating Brewfile ***************\n'
     cd $DOTFILE_REPO/brew_packages
-    command brew bundle dump -f --describe
+    command brew bundle dump -f
     cd -
 end
 
