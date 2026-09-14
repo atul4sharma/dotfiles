@@ -19,6 +19,12 @@ function copy_from_to --description 'Copy files from $argv[1] to $argv[2]'
     cp -r $argv[1] $argv[2]
 end
 
+# Symlinked configs -- not copied here, diff sees no difference. Recreate with:
+#   ln -s $DOTFILE_REPO/nvim/init.lua      $HOME/.config/nvim/init.lua
+#   ln -s $DOTFILE_REPO/nvim/lua           $HOME/.config/nvim/lua
+#   ln -s $DOTFILE_REPO/clangd/config.yaml $HOME/Library/Preferences/clangd/config.yaml
+# clangd reads its user config from Library/Preferences on macOS, not ~/.config.
+
 set files_and_dirs_to_check \
     "$HOME/.vimrc,$DOTFILE_REPO/vim/vimrc" \
     "$HOME/.config/nvim/init.lua,$DOTFILE_REPO/nvim/init.lua" \

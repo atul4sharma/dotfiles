@@ -1,0 +1,13 @@
+# User-level clangd configuration.
+#
+# Most of my C++ lives in scratch directories with no compile_commands.json,
+# so clangd falls back to its default gnu++17 and flags C++20 features
+# (<ranges>, std::views, concepts) as errors even though `g++ -std=c++2a`
+# compiles them fine. These flags are appended to whatever clangd infers.
+#
+# A project with a real compile database still wins: those flags come from
+# the database, and only the additions below are layered on top. To override
+# per project, drop a .clangd file in its root.
+CompileFlags:
+  Add:
+    - -std=c++2a
