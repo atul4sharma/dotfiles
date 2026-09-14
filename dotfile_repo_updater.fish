@@ -26,7 +26,8 @@ set -g managed_links \
     "$HOME/.config/nvim/init.lua,nvim/init.lua" \
     "$HOME/.config/nvim/lua,nvim/lua" \
     "$HOME/Library/Preferences/clangd/config.yaml,clangd/config.yaml" \
-    "$HOME/.claude/CLAUDE.md,claude/CLAUDE.md"
+    "$HOME/.claude/CLAUDE.md,claude/CLAUDE.md" \
+    "$HOME/.claude/statusline-command.sh,claude/statusline-command.sh"
 
 function link_state --description 'Classify $argv[1] against wanted target $argv[2] without touching anything'
     set -l __live $argv[1]
