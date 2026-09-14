@@ -107,3 +107,5 @@ cask "font-fira-sans"
 cask "keymapp"
 # Window manager
 cask "tiles"
+# Native desktop client for WhatsApp
+cask "whatsapp"
